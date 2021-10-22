@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import { graphql, StaticQuery } from "gatsby"
 import { navigate } from "gatsby-link"
 import Image from "../../Image"
-import useBreakpoints from "../../../hooks/useBreakpoints"
 import "./Music.scss"
 export const FeedRollRaw = ({ data }) => {
   const { edges: posts } = data.allMarkdownRemark

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useLayoutEffect } from "react"
 import throttle from "lodash/throttle"
 
 const checkMaxWidth = (width) => {
@@ -24,7 +24,7 @@ const useMobile = () => {
   const [isMobile, setIsMd] = useState(() => checkWidth(window.innerWidth))
   const [isMax, setIsMax] = useState(() => checkMaxWidth(window.innerWidth))
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const calcInnerWidth = throttle(function () {
       setIsMd(checkWidth(window.innerWidth))
       setIsMax(checkMaxWidth(window.innerWidth))
