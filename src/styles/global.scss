@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant:wght@300;700&display=swap");
+@import "./settings/variables";
+@import "./import";
+@import "./ui";
+
+body {
+  background-color: $black;
+  color: white;
+  align-items: center;
+}
+
+.container {
+  max-width: $page-max-width;
+  margin: 0 auto;
+  padding: 0 3rem;
+  @include media("<lg") {
+    padding: 0 1rem;
+  }
+}
+
+.section {
+  min-height: 80vh;
+}

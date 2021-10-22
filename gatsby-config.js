@@ -1,12 +1,129 @@
+const config = require('./config')
+const {
+  NODE_ENV,
+  URL: NETLIFY_SITE_URL = config.siteMetadata.siteUrl,
+  DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
+  CONTEXT: NETLIFY_ENV = NODE_ENV,
+} = process.env
+const isNetlifyProduction = NETLIFY_ENV === 'production'
+const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL
+
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby + Netlify CMS Starter',
-    description:
-      'This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.',
+    siteUrl,
+    title: config.siteMetadata.title,
+    description: config.siteMetadata.description,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
+    `gatsby-plugin-preload-fonts`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: config.siteMetadata.title,
+        short_name: config.siteMetadata.shortName,
+        start_url: `/`,
+        theme_color: config.colors.primary,
+        background_color: config.colors.background,
+        icon: `static/img/favicon-32x32.png`,
+        display: `standalone`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        query: `
+        {
+          allSitePage {
+            nodes {
+              path
+            }
+          }
+          allMarkdownRemark {
+            nodes {
+              frontmatter {
+                date
+              }
+              fields {
+                slug
+              }
+            }
+          }
+        }
+      `,
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({
+          allSitePage: { nodes: allPages },
+          allMarkdownRemark: { nodes: allNodes },
+        }) => {
+          const nodeMap = allNodes.reduce((acc, node) => {
+            const { slug } = node.fields
+            if (slug) acc[slug] = node.frontmatter
+            return acc
+          }, {})
+
+          return allPages.map((page) => {
+            return { ...page, ...nodeMap[page.path] }
+          })
+        },
+        serialize: ({ path, date }) => {
+          let lastmod = new Date().toJSON()
+          if (date) {
+            lastmod = date
+          }
+          return {
+            url: path,
+            lastmod,
+          }
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        resolveEnv: () => NETLIFY_ENV,
+        env: {
+          production: {
+            policy: [{ userAgent: '*', disallow: ['/admin'] }],
+          },
+          'branch-deploy': {
+            policy: [{ userAgent: '*', disallow: ['/admin'] }],
+            sitemap: null,
+            host: null,
+          },
+          'deploy-preview': {
+            policy: [{ userAgent: '*', disallow: ['/admin'] }],
+            sitemap: null,
+            host: null,
+          },
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        // Setting a color is optional.
+        color: config.colors.orange,
+        // Disable the loading spinner.
+        showSpinner: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-typescript`,
+      options: {
+        isTSX: true,
+        jsxPragma: `jsx`, // defaults to "React"
+        allExtensions: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/hooks/utils/typography`,
+      },
+    },
+    `gatsby-plugin-image`,
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support
       resolve: 'gatsby-source-filesystem',
@@ -18,37 +135,26 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages',
+        path: `${__dirname}/src/img`,
+        name: 'images',
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/img`,
-        name: 'images',
+        path: `${__dirname}/src/pages`,
+        name: 'pages',
       },
     },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
+
     {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          {
-            resolve: 'gatsby-remark-relative-images',
-            options: {
-              name: 'uploads',
-            },
-          },
+          `gatsby-remark-relative-images`,
           {
             resolve: 'gatsby-remark-images',
-            options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 2048,
-            },
+            options: { maxWidth: 2048 },
           },
           {
             resolve: 'gatsby-remark-copy-linked-files',
@@ -59,17 +165,28 @@ module.exports = {
         ],
       },
     },
+
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`, // Needed for dynamic images
+    {
+      resolve: `gatsby-plugin-netlify-cms-paths`,
+      options: {
+        // Path to your Netlify CMS config file
+        cmsConfig: `/static/admin/config.yml`,
+      },
+    },
+
     {
       resolve: 'gatsby-plugin-netlify-cms',
       options: {
-        modulePath: `${__dirname}/src/cms/cms.js`,
+        modulePath: `${__dirname}/src/cms/cms.ts`,
       },
     },
     {
       resolve: 'gatsby-plugin-purgecss', // purges all unused/unreferenced css rules
       options: {
         develop: true, // Activates purging in npm run develop
-        purgeOnly: ['/all.sass'], // applies purging only on the bulma css file
+        // purgeOnly: ['/all.sass'], // applies purging only on the bulma css file
       },
     }, // must be after other CSS plugins
     'gatsby-plugin-netlify', // make sure to keep it last in the array
