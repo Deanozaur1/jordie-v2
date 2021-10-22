@@ -9,7 +9,7 @@ const usePageAnimation = (
     if (
       !selectorAll?.length ||
       (typeof window !== `undefined` &&
-        !(window as any).___BLASTOYZ_INITIAL_RENDER_COMPLETE)
+        !(window as any).___APP_INITIAL_RENDER_COMPLETE)
     ) {
       return
     }
