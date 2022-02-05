@@ -32,7 +32,7 @@ const Image: React.FC<ImageProps> = ({
         alt={alt}
         style={{ ...imgStyle }}
         className={classNames(
-          "ui--image img static-img",
+          "ui-image img static-img",
           className,
           containerClassName
         )}
@@ -49,7 +49,7 @@ const Image: React.FC<ImageProps> = ({
       image={image}
       imgStyle={imgStyle}
       style={{ ...style }}
-      className={classNames("ui--image", containerClassName)}
+      className={classNames("ui-image", containerClassName)}
       imgClassName={classNames("img", className)}
       {...otherProps}
     />

@@ -15,8 +15,8 @@ module.exports = {
     description: config.siteMetadata.description,
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sass',
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-sass",
     `gatsby-plugin-preload-fonts`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -31,7 +31,7 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-sitemap',
+      resolve: "gatsby-plugin-sitemap",
       options: {
         query: `
         {
@@ -44,6 +44,7 @@ module.exports = {
             nodes {
               frontmatter {
                 date
+                modifiedAt
               }
               fields {
                 slug
@@ -63,37 +64,29 @@ module.exports = {
             return acc
           }, {})
 
-          return allPages.map((page) => {
-            return { ...page, ...nodeMap[page.path] }
-          })
+          return allPages.map((page) => ({ ...page, ...nodeMap[page.path] }))
         },
-        serialize: ({ path, date }) => {
-          let lastmod = new Date().toJSON()
-          if (date) {
-            lastmod = date
-          }
-          return {
-            url: path,
-            lastmod,
-          }
-        },
+        serialize: ({ path: url, date, modifiedAt }) => ({
+          url,
+          lastmod: modifiedAt || date || new Date().toJSON(),
+        }),
       },
     },
     {
-      resolve: 'gatsby-plugin-robots-txt',
+      resolve: "gatsby-plugin-robots-txt",
       options: {
         resolveEnv: () => NETLIFY_ENV,
         env: {
           production: {
-            policy: [{ userAgent: '*', disallow: ['/admin'] }],
+            policy: [{ userAgent: "*", disallow: ["/admin"] }],
           },
-          'branch-deploy': {
-            policy: [{ userAgent: '*', disallow: ['/admin'] }],
+          "branch-deploy": {
+            policy: [{ userAgent: "*", disallow: ["/admin"] }],
             sitemap: null,
             host: null,
           },
-          'deploy-preview': {
-            policy: [{ userAgent: '*', disallow: ['/admin'] }],
+          "deploy-preview": {
+            policy: [{ userAgent: "*", disallow: ["/admin"] }],
             sitemap: null,
             host: null,
           },
@@ -126,40 +119,40 @@ module.exports = {
     `gatsby-plugin-image`,
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/static/img`,
-        name: 'uploads',
+        name: "uploads",
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/src/img`,
-        name: 'images',
+        name: "images",
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/src/pages`,
-        name: 'pages',
+        name: "pages",
       },
     },
 
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
           `gatsby-remark-relative-images`,
           {
-            resolve: 'gatsby-remark-images',
+            resolve: "gatsby-remark-images",
             options: { maxWidth: 2048 },
           },
           {
-            resolve: 'gatsby-remark-copy-linked-files',
+            resolve: "gatsby-remark-copy-linked-files",
             options: {
-              destinationDir: 'static',
+              destinationDir: "static",
             },
           },
         ],
@@ -177,18 +170,18 @@ module.exports = {
     },
 
     {
-      resolve: 'gatsby-plugin-netlify-cms',
+      resolve: "gatsby-plugin-netlify-cms",
       options: {
         modulePath: `${__dirname}/src/cms/cms.ts`,
       },
     },
     {
-      resolve: 'gatsby-plugin-purgecss', // purges all unused/unreferenced css rules
+      resolve: "gatsby-plugin-purgecss", // purges all unused/unreferenced css rules
       options: {
         develop: true, // Activates purging in npm run develop
         // purgeOnly: ['/all.sass'], // applies purging only on the bulma css file
       },
     }, // must be after other CSS plugins
-    'gatsby-plugin-netlify', // make sure to keep it last in the array
+    "gatsby-plugin-netlify", // make sure to keep it last in the array
   ],
 }

@@ -51,10 +51,6 @@ const SEO: React.FC = () => {
       <meta name="twitter:site" content={title} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta
-        property="twitter:image"
-        content={`${withPrefix("/")}img/og-image.jpg`}
-      />
 
       <link rel="preconnect" href="https://fonts.gstatic.com" />
     </Helmet>

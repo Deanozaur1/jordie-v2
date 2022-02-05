@@ -15,4 +15,15 @@ CMS.registerPreviewTemplate("index", IndexPagePreview as any)
 CMS.registerPreviewTemplate("about", AboutPagePreview as any)
 CMS.registerPreviewTemplate("blog", BlogPostPreview as any)
 
-// npm i gatsby-source-filesystem@latest gatsby-transformer-remark@latest gatsby-transformer-sharp@latest netlify-cms-app@latest node-sass@latest
+
+CMS.registerEventListener({
+    name: "prePublish",
+    handler: ({ entry }) =>
+        entry.get("data").set("modifiedAt", new Date().toJSON()),
+})
+
+CMS.registerEventListener({
+    name: "preSave",
+    handler: ({ entry }) =>
+        entry.get("data").set("modifiedAt", new Date().toJSON()),
+})

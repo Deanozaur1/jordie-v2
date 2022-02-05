@@ -1,17 +1,11 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { graphql, StaticQuery } from "gatsby"
 import { navigate } from "gatsby-link"
 import Image from "../../Image"
 import "./Music.scss"
+
 export const FeedRollRaw = ({ data }) => {
   const { edges: posts } = data.allMarkdownRemark
-
-  const pists = {
-    get list() {
-      return posts.map((post) => post.frontmatter)
-    },
-  }
 
   return (
     <div className="feed-roll">
@@ -38,14 +32,6 @@ export const FeedRollRaw = ({ data }) => {
         })}
     </div>
   )
-}
-
-FeedRollRaw.propTypes = {
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.array,
-    }),
-  }),
 }
 
 export default () => (

@@ -1,12 +1,9 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { kebabCase } from "lodash"
 import { Helmet } from "react-helmet"
 import { graphql, Link } from "gatsby"
-import Layout from "../components/Layout"
-import Content, { HTMLContent } from "../components/Content"
+import { Image, HTMLContent, Layout } from "../components"
 import { getSrc } from "gatsby-plugin-image"
-import Image from "../components/Image"
 
 export const BlogPostTemplate = ({
   content,
@@ -17,8 +14,6 @@ export const BlogPostTemplate = ({
   title,
   helmet,
 }) => {
-  const PostContent = contentComponent || Content
-
   return (
     <section className="section">
       {helmet || ""}
@@ -30,7 +25,7 @@ export const BlogPostTemplate = ({
             </h1>
             <p>{description}</p>
             <Image src={featuredimage} alt={title} />
-            <PostContent content={content} />
+            <HTMLContent content={content} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
                 <h4>Tags</h4>
@@ -48,14 +43,6 @@ export const BlogPostTemplate = ({
       </div>
     </section>
   )
-}
-
-BlogPostTemplate.propTypes = {
-  content: PropTypes.node.isRequired,
-  contentComponent: PropTypes.func,
-  description: PropTypes.string,
-  title: PropTypes.string,
-  helmet: PropTypes.object,
 }
 
 const BlogPost = ({ data }) => {
@@ -92,12 +79,6 @@ const BlogPost = ({ data }) => {
       />
     </Layout>
   )
-}
-
-BlogPost.propTypes = {
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.object,
-  }),
 }
 
 export default BlogPost

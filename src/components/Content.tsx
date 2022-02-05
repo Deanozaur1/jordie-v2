@@ -1,19 +1,22 @@
+import classNames from "classnames"
 import React from "react"
-import PropTypes from "prop-types"
+import { BaseProps } from "../@types"
 
-export const HTMLContent = ({ content, className }) => (
-  <main className={className} dangerouslySetInnerHTML={{ __html: content }} />
-)
+type HTMLContentProps = { content: any } & BaseProps
 
-const Content = ({ content, className }) => (
-  <main className={className}>{content}</main>
-)
-
-Content.propTypes = {
-  content: PropTypes.node,
-  className: PropTypes.string,
+const HTMLContent: React.FC<HTMLContentProps> = ({ content, className }) => {
+  if (!content) {
+    return null
+  } else if (typeof content === "string") {
+    return (
+      <main
+        className={classNames(["rich-body", className])}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    )
+  } else {
+    return <main className={className}>{content}</main>
+  }
 }
 
-HTMLContent.propTypes = Content.propTypes
-
-export default Content
+export default HTMLContent
