@@ -2,6 +2,7 @@
 templateKey: 'blog-post'
 title: 'Just in: small batch of Jamaican Blue Mountain in store next week'
 date: 2017-01-04T15:04:10.000Z
+modifiedAt: 2017-01-04T15:04:10.000Z
 featuredpost: true
 featuredimage: /img/chemex.jpg 
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer imperdiet leo non diam blandit, eget dignissim purus maximus.
