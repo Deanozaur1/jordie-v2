@@ -11,11 +11,10 @@ mainpitch:
     shouldn't just taste good, it should do good too. We source all of our beans
     directly from small scale sustainable farmers and make sure part of the
     profits are reinvested in their communities.
-description: >-
-  Lorem is the ultimate spot for coffee lovers who want to learn about their
-  java’s origin and support the farmers that grew it. We take coffee production,
-  roasting and brewing seriously and we’re glad to pass that knowledge to
-  anyone.
+description: Lorem is the ultimate spot for coffee lovers who want to learn
+  about their java’s origin and support the farmers that grew it. We take coffee
+  production, roasting and brewing seriously and we’re glad to pass that
+  knowledge to anyone.
 intro:
   blurbs:
     - image: /img/coffee.png
@@ -51,6 +50,23 @@ intro:
     java’s origin and support the farmers that grew it. We take coffee
     production, roasting and brewing seriously and we’re glad to pass that
     knowledge to anyone. This is an edit via identity...
+  test:
+    - |-
+      דגכדגכדגכגדכדג
+      ד
+      גכדג
+      כ
+
+
+      דגכדגכגדכגדכדגכד כדגכ גדכדג כדג כדגכ דגכ דגכ דגכ
+
+      דגכ גדכגדכ
+    - |
+      דגכדגכ
+      דגכדג
+      דג
+      כ
+      דג
 main:
   heading: Great coffee with no compromises
   description: >
@@ -67,4 +83,5 @@ main:
   image3:
     alt: Coffee beans
     image: /img/products-grid1.jpg
+modifiedAt: 2022-02-05T20:07:11.370Z
 ---
