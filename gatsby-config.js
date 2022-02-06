@@ -1,11 +1,11 @@
-const config = require('./config')
+const config = require("./config")
 const {
   NODE_ENV,
   URL: NETLIFY_SITE_URL = config.siteMetadata.siteUrl,
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
   CONTEXT: NETLIFY_ENV = NODE_ENV,
 } = process.env
-const isNetlifyProduction = NETLIFY_ENV === 'production'
+const isNetlifyProduction = NETLIFY_ENV === "production"
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL
 
 module.exports = {
@@ -17,7 +17,6 @@ module.exports = {
   plugins: [
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sass",
-    `gatsby-plugin-preload-fonts`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -100,6 +99,23 @@ module.exports = {
         color: config.colors.orange,
         // Disable the loading spinner.
         showSpinner: false,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        typekit: {
+          id: process.env.TYPEKIT_ID,
+        },
+      },
+    },
+    `gatsby-plugin-preload-fonts`,
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /svg/,
+        },
       },
     },
     {

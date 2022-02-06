@@ -5,9 +5,6 @@ date: 2021-01-03T15:04:10.000Z
 featuredpost: false
 featuredimage: /img/chemex.jpg
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer imperdiet leo non diam blandit, eget dignissim purus maximus.
-tags:
-  - lorem
-  - ipsum
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer imperdiet leo non diam blandit, eget dignissim purus maximus. Fusce finibus diam quis sem blandit **iaculis**. Nullam tempus nunc ut ipsum rutrum, sit amet volutpat diam faucibus. In nec dapibus ligula. Vivamus maximus, sem at molestie gravida, enim felis tincidunt enim, eu malesuada turpis dui eget augue. Donec pharetra lacus id nibh sodales, vel rhoncus nisl consectetur. Integer vehicula tellus sit amet bibendum eleifend. Suspendisse eget porttitor nibh.

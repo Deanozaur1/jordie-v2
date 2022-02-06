@@ -1,0 +1,20 @@
+.text {
+  &-symbol {
+    font-size: 0.875rem;
+    font-weight: normal;
+    line-height: 1.18;
+    letter-spacing: -0.22px;
+    font-weight: 100;
+    @include media("<md") {
+    }
+  }
+
+  &-head--small {
+    font-size: 2.6rem;
+    line-height: 1;
+    font-weight: 300;
+    @include media("<md") {
+      font-size: 1.35rem;
+    }
+  }
+}

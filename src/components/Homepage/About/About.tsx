@@ -1,18 +1,51 @@
 import React from "react"
 import classNames from "classnames"
 import { BaseProps } from "../../../@types"
+import { Homepage } from "../../../templates/index-page"
 
-// import "./AboutSection.scss";
+import "./About.scss"
+import { Image } from "../.."
 
-type AboutSectionProps = {
-  prop?: any
+type AboutProps = {
+  data: Homepage["main"]
 } & BaseProps
 
-const AboutSection: React.FC<AboutSectionProps> = ({
-  prop,
+const About: React.FC<AboutProps> = ({
+  data: { portrait, briefs },
   className,
-}: AboutSectionProps) => {
-  return <div className={classNames(["AboutSection", className])}></div>
+}: AboutProps) => {
+  const [briefSelection, setBriefSelection] = React.useState(0)
+
+  return (
+    <div className="about" id="about">
+      <div className="about__container inner-container">
+        <div className="about__portrait">
+          <Image src={portrait} alt="Jordie portrait" />
+        </div>
+
+        <div className="about__briefs">
+          <div className="about__briefs-titles">
+            {briefs.map((brief, i) => (
+              <div
+                className={classNames("about__brief-title", {
+                  "about__brief-title--selected": i === briefSelection,
+                })}
+                key={i}
+                onClick={() => setBriefSelection(i)}
+              >
+                {Boolean(i) && <b className="slash-divider">/</b>}
+                <span>{brief.title}</span>
+              </div>
+            ))}
+          </div>
+
+          <p className="about__briefs-text">
+            {briefs[briefSelection].text}
+          </p>
+        </div>
+      </div>
+    </div>
+  )
 }
 
-export default AboutSection
+export default About

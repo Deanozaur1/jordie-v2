@@ -1,14 +1,27 @@
 import React from "react"
+import { Image } from "../.."
 
 import "./Hero.scss"
-const Hero: React.FC = (props: any) => {
+
+const Hero: React.FC<any> = ({ image }) => {
   return (
     <header className="hero">
-      <img
-        src="https://media1.giphy.com/media/kcrO3B49pOPAkxUHsD/giphy.gif?cid=ecf05e47jcnn5vzayxdgzyjazg18zzl8liy3cb3rsmm67887&rid=giphy.gif&ct=g"
-        draggable="false"
-      />
-      <h1 className="hero--title">in construction</h1>
+      <div className="hero__title-wrap">
+        <h1 className="hero__title">
+          DESIGN STUDIO
+          <br />
+          FOR <i>INSPIRING</i> DESIGN'S
+        </h1>
+      </div>
+
+      <div className="hero__bg">
+        <Image
+          src={image}
+          alt="gal"
+          style={{ height: "100%",  }}
+          imgStyle={{ height: "100%", objectPosition: "50% 100%" }}
+        />
+      </div>
     </header>
   )
 }

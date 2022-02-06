@@ -1,0 +1,58 @@
+@import "../../../styles/import";
+
+.footer {
+  background-color: $bg;
+  height: $footer-height;
+  min-height: $footer-height;
+  max-height: $footer-height;
+
+  display: flex;
+  align-items: center;
+  z-index: 1;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    & > * {
+      flex: 1;
+    }
+  }
+
+  &__social-links {
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+    & > * + * {
+      margin-inline-start: 0.75rem;
+    }
+  }
+
+  &__map {
+    display: flex;
+    justify-content: flex-end;
+
+    &-wrap {
+      max-width: 250px;
+      display: flex;
+      flex-wrap: wrap;
+      & > * {
+        flex: 0 0 50%;
+      }
+    }
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin: 0;
+
+    & > * + * {
+      margin: 0 0 0;
+    }
+  }
+}

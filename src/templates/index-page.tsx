@@ -2,38 +2,40 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Layout } from "../components"
 import Hero from "../components/Homepage/Hero/Hero"
+import { ItemType, PageProps, JordiePageFC } from "../@types"
+import { About, Intro } from "../components/Homepage"
 
-export const IndexPageTemplate = ({
-  image,
-  title,
-  heading,
-  subheading,
-  mainpitch,
-  description,
-  intro,
+export type Homepage = {
+  image: any
+  intro: {
+    title: string
+    texts: string[]
+  }
+  main: {
+    portrait: any
+    briefs: ItemType[]
+  }
+}
+
+export const IndexPageTemplate: React.FC<PageProps<Homepage>> = ({
+  data: { image, intro, main },
 }) => (
-  <div className="home container">
-    <Hero />
+  <React.Fragment>
+    <Hero image={image} />
+    <Intro data={intro} />
+    <About data={main} />
     {/* <MusicRoll /> */}
-  </div>
+  </React.Fragment>
 )
 
-const IndexPage = ({ data }) => {
+const IndexPage: JordiePageFC = ({ data, location }) => {
   const { frontmatter } = data.markdownRemark
 
-  return (
-    <Layout>
-      <IndexPageTemplate
-        image={frontmatter.image}
-        title={frontmatter.title}
-        heading={frontmatter.heading}
-        subheading={frontmatter.subheading}
-        mainpitch={frontmatter.mainpitch}
-        description={frontmatter.description}
-        intro={frontmatter.intro}
-      />
-    </Layout>
-  )
+  return <IndexPageTemplate data={frontmatter} location={location} />
+}
+
+IndexPage.layoutProps = {
+  className: "home",
 }
 
 export default IndexPage
@@ -45,27 +47,32 @@ export const pageQuery = graphql`
         title
         image {
           childImageSharp {
-            gatsbyImageData(width: 200)
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              placeholder: TRACED_SVG
+              formats: [AUTO, WEBP, AVIF]
+            )
           }
         }
-        heading
-        subheading
-        mainpitch {
-          title
-          description
-        }
-        description
         intro {
-          blurbs {
-            image {
-              childImageSharp {
-                gatsbyImageData(width: 200)
-              }
+          title
+          texts
+        }
+        main {
+          portrait {
+            childImageSharp {
+              gatsbyImageData(
+                width: 450
+                layout: CONSTRAINED
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
+          }
+          briefs {
+            title
             text
           }
-          heading
-          description
         }
       }
     }

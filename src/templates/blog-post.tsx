@@ -10,7 +10,6 @@ export const BlogPostTemplate = ({
   contentComponent,
   description,
   featuredimage,
-  tags,
   title,
   helmet,
 }) => {
@@ -26,18 +25,6 @@ export const BlogPostTemplate = ({
             <p>{description}</p>
             <Image src={featuredimage} alt={title} />
             <HTMLContent content={content} />
-            {tags && tags.length ? (
-              <div style={{ marginTop: `4rem` }}>
-                <h4>Tags</h4>
-                <ul className="taglist">
-                  {tags.map((tag) => (
-                    <li key={tag + `tag`}>
-                      <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
           </div>
         </div>
       </div>
@@ -73,7 +60,6 @@ const BlogPost = ({ data }) => {
             <meta property="og:image" content={src} />
           </Helmet>
         }
-        tags={post.frontmatter.tags}
         featuredimage={post.frontmatter.featuredimage}
         title={post.frontmatter.title}
       />
@@ -92,7 +78,6 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         title
         description
-        tags
         featuredimage {
           childImageSharp {
             gatsbyImageData(

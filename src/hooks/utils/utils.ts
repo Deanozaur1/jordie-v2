@@ -109,18 +109,28 @@ export const getMousePos = (e: MouseEvent): { x: number; y: number } => {
 }
 
 export const mapRemarkToPage = <T = any>(edges: any): T => {
+  if (edges.edges) {
+    edges = edges.edges
+  }
+  if (!edges)
+    throw new Error(
+      `Error in mapRemarkToPage: edges is not available, { edges: ${JSON.stringify(
+        edges
+      )} }`
+    )
   const isArray = Array.isArray(edges)
   if (!isArray) edges = [edges]
   const mapped = edges.map((n) => {
-    if (isArray || n.node) n = n.node
+    if (isArray || n?.node) n = n?.node
     return {
       id: n?.id ?? null,
       slug: n?.fields?.slug ?? null,
-      ...n.frontmatter,
+      ...(n?.frontmatter || n),
     }
   })
   return !isArray ? mapped[0] : mapped
 }
+
 
 export const isUrl = (url: string) => {
   const expression =

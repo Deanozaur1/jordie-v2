@@ -1,87 +1,37 @@
 ---
 templateKey: index-page
-title: Great coffee with a conscience
-image: /img/home-jumbotron.jpg
-heading: Great coffee with a conscience
-subheading: Support sustainable farming while enjoying a cup
-mainpitch:
-  title: Why Lorem
-  description: >
-    Lorem is the coffee store for everyone who believes that great coffee
-    shouldn't just taste good, it should do good too. We source all of our beans
-    directly from small scale sustainable farmers and make sure part of the
-    profits are reinvested in their communities.
-description: Lorem is the ultimate spot for coffee lovers who want to learn
-  about their java’s origin and support the farmers that grew it. We take coffee
-  production, roasting and brewing seriously and we’re glad to pass that
-  knowledge to anyone.
+title: Design Studio For Inspiring designs
+image: /img/heros/home-jumbotron.jpg
 intro:
-  blurbs:
-    - image: /img/coffee.png
-      text: >
-        We sell green and roasted coffee beans that are sourced directly from
-        independent farmers and farm cooperatives. We’re proud to offer a
-        variety of coffee beans grown with great care for the environment and
-        local communities. Check our post or contact us directly for current
-        availability.
-    - image: /img/coffee-gear.png
-      text: >
-        We offer a small, but carefully curated selection of brewing gear and
-        tools for every taste and experience level. No matter if you roast your
-        own beans or just bought your first french press, you’ll find a gadget
-        to fall in love with in our shop.
-    - image: /img/tutorials.png
-      text: >
-        Love a great cup of coffee, but never knew how to make one? Bought a
-        fancy new Chemex but have no clue how to use it? Don't worry, we’re here
-        to help. You can schedule a custom 1-on-1 consultation with our baristas
-        to learn anything you want to know about coffee roasting and brewing.
-        Email us or call the store for details.
-    - image: /img/meeting-space.png
-      text: >
-        We believe that good coffee has the power to bring people together.
-        That’s why we decided to turn a corner of our shop into a cozy meeting
-        space where you can hang out with fellow coffee lovers and learn about
-        coffee making techniques. All of the artwork on display there is for
-        sale. The full price you pay goes to the artist.
-  heading: What we offer
-  description: >
-    Lorem is the ultimate spot for coffee lovers who want to learn about their
-    java’s origin and support the farmers that grew it. We take coffee
-    production, roasting and brewing seriously and we’re glad to pass that
-    knowledge to anyone. This is an edit via identity...
-  test:
+  title: My Values
+  texts:
     - |-
-      דגכדגכדגכגדכדג
-      ד
-      גכדג
-      כ
-
-
-      דגכדגכגדכגדכדגכד כדגכ גדכדג כדג כדגכ דגכ דגכ דגכ
-
-      דגכ גדכגדכ
+      Bringing forward the culture and philosophies
+      of the brand through visual identity.
     - |
-      דגכדגכ
-      דגכדג
-      דג
-      כ
-      דג
+      Using my passion for architecture and fashion as
+      a pillar for unique designs.
+    - |
+      Creating inspiring designs made to invigorate lasting
+      growth of the brand
 main:
-  heading: Great coffee with no compromises
-  description: >
-    We hold our coffee to the highest standards from the shrub to the cup.
-    That’s why we’re meticulous and transparent about each step of the coffee’s
-    journey. We personally visit each farm to make sure the conditions are
-    optimal for the plants, farmers and the local environment.
-  image1:
-    alt: A close-up of a paper filter filled with ground coffee
-    image: /img/products-grid3.jpg
-  image2:
-    alt: A green cup of a coffee on a wooden table
-    image: /img/products-grid2.jpg
-  image3:
-    alt: Coffee beans
-    image: /img/products-grid1.jpg
-modifiedAt: 2022-02-05T20:07:11.370Z
+  portrait: /img/heros/jordie-picture.jpg
+  briefs:
+    - title: Design
+      text: >
+        I’m Yarden Daniel, a graphic designer based in Tel-Aviv.
+        My full-time job is actually a QA engineer in a cyber-
+        security company, but my dream is to open my own design
+        studio one day.
+    - title: Personal
+      text: >
+        I’m Yarden Daniel, a graphic designer based in Tel-Aviv.
+        My full-time job is actually a QA engineer in a cyber-
+        security company, but my dream is to open my own design
+        studio one day.
+        
+
+        In my free time I love reading a good book, enjoying a
+        show at the theatre and practicing my new sewing hobby.
+        I’m constantly searching for the best cream-puffs in town.
 ---
