@@ -19,6 +19,11 @@ const typography = new Typography({
     h1: {
       marginBottom: rhythm(10 / 16),
     },
+    'h2, .head-2': {
+      fontWeight: 300,
+      marginBottom: rhythm(8 / 16),
+      ...adjustFontSizeTo("64px"),
+    },
     h3: {
       fontFamily: [Fonts.Kepler, ...DEFAULT_FONTS].join(', '),
       fontWeight: 500,

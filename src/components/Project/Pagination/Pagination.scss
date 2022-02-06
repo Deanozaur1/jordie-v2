@@ -1,0 +1,40 @@
+.p-navigation {
+  display: flex;
+  align-items: center;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  .nav-next,
+  .nav-prev {
+    padding: 1rem 2rem;
+    color: $dark;
+    border: $dark 1px solid;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: border-color ease-in 100ms, color ease-in 100ms;
+
+    &:hover {
+      color: $bg;
+      border-color: lighten($dark, 20%);
+    }
+    &:active {
+      color: darken($bg, 10%);
+      border-color: lighten($dark, 5%);
+    }
+  }
+  .nav-prev {
+    margin-inline-end: auto;
+
+    &::before {
+      content: "←";
+      margin-inline-end: 0.5rem;
+    }
+  }
+  .nav-next {
+    margin-inline-start: auto;
+
+    &::after {
+      content: "→";
+      margin-inline-start: 0.5rem;
+    }
+  }
+}

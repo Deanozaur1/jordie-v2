@@ -109,7 +109,7 @@ export const getMousePos = (e: MouseEvent): { x: number; y: number } => {
 }
 
 export const mapRemarkToPage = <T = any>(edges: any): T => {
-  if (edges.edges) {
+  if (edges?.edges) {
     edges = edges.edges
   }
   if (!edges)

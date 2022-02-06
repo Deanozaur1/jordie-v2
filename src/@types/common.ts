@@ -44,5 +44,5 @@ export type Project = CmsItem & {
   brief: string
   shortBrief: string
   featuredimage: any
-  images: any[]
+  gallery: { image: any, alt: string }[]
 }

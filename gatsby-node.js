@@ -8,7 +8,10 @@ exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
     {
-      allMarkdownRemark(limit: 1000) {
+      allMarkdownRemark(
+        sort: { order: ASC, fields: [frontmatter___date] }
+        limit: 1000
+      ) {
         edges {
           node {
             id
@@ -30,13 +33,41 @@ exports.createPages = ({ actions, graphql }) => {
 
     const posts = result.data.allMarkdownRemark.edges
 
-    posts.forEach((edge) => {
+    const allProjects = posts.filter(
+      (edge) => edge.node.frontmatter.templateKey === "project"
+    )
+
+    const getProjectPagination = (id) => {
+      const index = allProjects.findIndex((project) => project.node.id === id)
+      if (index === -1) return {}
+
+      const prev = index === 0 ? null : allProjects[index - 1]
+      const next =
+        index === allProjects.length - 1 ? null : allProjects[index + 1]
+
+      const protectReturn = (val) => {
+        if (!val) return null
+        // else if (val.node.id === id) return null
+        else return val.node.id
+      }
+
+      return {
+        previousPostId: protectReturn(prev),
+        nextPostId: protectReturn(next),
+      }
+    }
+
+    posts.forEach((edge, index) => {
       const id = edge.node.id
       const templateKey = edge.node.frontmatter.templateKey
       const isTargetedPost = Boolean(edge.node.frontmatter.targetUrl)
 
       if (ignoredPaths.some((p) => templateKey.includes(p)) || isTargetedPost) {
         return
+      }
+      let pagination = {}
+      if (templateKey === "project") {
+        pagination = getProjectPagination(id)
       }
 
       createPage({
@@ -45,6 +76,7 @@ exports.createPages = ({ actions, graphql }) => {
         // additional data can be passed via context
         context: {
           id,
+          ...pagination,
         },
       })
     })

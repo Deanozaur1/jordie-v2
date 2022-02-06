@@ -1,0 +1,29 @@
+@import "../import";
+@import "../../components/Project/Briefs/Briefs.scss";
+@import "../../components/Project/Gallery/Gallery.scss";
+@import "../../components/Project/Pagination/Pagination.scss";
+
+.project {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+  &__header {
+    padding-bottom: 2rem;
+    overflow: hidden;
+    h1 {
+      white-space: pre;
+      text-align: center;
+    }
+  }
+
+  &__brief {
+    padding: 5rem 10rem;
+  }
+
+
+  @include media("<md") {
+    &__brief {
+      padding: 1rem;
+    }
+  }
+}

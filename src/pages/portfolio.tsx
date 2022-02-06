@@ -5,25 +5,30 @@ import { graphql } from "gatsby"
 import { mapRemarkToPage } from "../hooks"
 import { StaticImage } from "gatsby-plugin-image"
 import { ProjectCard } from "../components"
+import config from "../../config"
 
 import "../styles/pages/portfolio.scss"
+import { Helmet } from "react-helmet"
 
 const PortfolioPageTemplate: JordiePageFC<Project[]> = ({ data }) => {
   return (
     <>
+      <Helmet titleTemplate={`${config.siteMetadata.shortName} - %s`}>
+        <title>Portfolio</title>
+      </Helmet>
+
       <div className="portfolio__bg-wrap">
         <StaticImage
           layout="fullWidth"
           className="portfolio__bg"
           src="../../static/img/media/waves-bg.jpg"
-          width={1920}
           alt="Waves background"
         />
       </div>
 
       <div className="portfolio__container inner-container">
         <div className="portfolio__projects">
-          {[...data, ...data, ...data].map((project, i) => (
+          {data.map((project, i) => (
             <ProjectCard
               key={project.id + i}
               data={project}
