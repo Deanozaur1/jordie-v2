@@ -11,6 +11,7 @@ import "../styles/pages/portfolio.scss"
 import { Helmet } from "react-helmet"
 
 const PortfolioPageTemplate: JordiePageFC<Project[]> = ({ data }) => {
+  console.log({ data })
   return (
     <>
       <Helmet titleTemplate={`${config.siteMetadata.shortName} - %s`}>

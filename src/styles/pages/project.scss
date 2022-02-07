@@ -1,4 +1,12 @@
 @import "../import";
+
+$project-img-width: 550px;
+$project-padding: 4rem;
+$project-space-between: 5rem;
+$project-max-width: calc(
+  #{$project-img-width * 2} + #{$project-space-between} + #{$project-padding}
+);
+
 @import "../../components/Project/Briefs/Briefs.scss";
 @import "../../components/Project/Gallery/Gallery.scss";
 @import "../../components/Project/Pagination/Pagination.scss";
@@ -20,10 +28,13 @@
     padding: 5rem 10rem;
   }
 
+  &__container {
+    max-width: $project-max-width !important;
+  }
 
   @include media("<md") {
     &__brief {
-      padding: 1rem;
+      padding: 2rem;
     }
   }
 }

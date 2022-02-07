@@ -13,4 +13,10 @@
     max-width: 345px;
     white-space: pre-line;
   }
+
+  @include media("<md") {
+    &__name {
+      flex: 0 1 35%;
+    }
+  }
 }

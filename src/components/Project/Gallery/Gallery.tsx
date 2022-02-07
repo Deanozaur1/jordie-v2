@@ -11,12 +11,16 @@ const Gallery: React.FC<GalleryProps> = ({
   images,
   className,
 }: GalleryProps) => {
-    console.log(images)
+  console.log(images)
   return (
     <div className={classNames(["p-gallery", className])}>
       {images?.map((image, index) => (
         <div className="p-gallery__item" key={index}>
-          <Image src={image.image} alt={image.alt} />
+          <Image
+            src={image.image}
+            alt={image.alt}
+            style={{ height: 550, width: 550 }}
+          />
         </div>
       ))}
     </div>

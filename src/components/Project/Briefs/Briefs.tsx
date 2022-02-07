@@ -14,7 +14,7 @@ const Briefs: React.FC<BriefsProps> = ({ data, className }: BriefsProps) => {
   ]
 
   return !list?.length ? null : (
-    <main className="project__brief container">
+    <main className="project__brief inner-container">
       {list.map(({ title, text }, index) => (
         <div className="brief" key={title + index}>
           <div className="brief__name">{title}</div>

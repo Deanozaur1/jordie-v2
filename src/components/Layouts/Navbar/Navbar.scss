@@ -18,6 +18,7 @@
   justify-content: space-between;
   min-height: $nav-height;
   z-index: 1;
+  overflow: hidden;
 
   a {
     color: var(--nav-color);
