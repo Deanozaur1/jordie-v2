@@ -9,6 +9,7 @@ platforms:
   - Ps
 date: 2022-01-02T15:04:10.000Z
 featuredimage: /img/chemex.jpg
+isArchived: false
 gallery:
   - image: /img/chemex.jpg
     alt: Slow manner papers mockup

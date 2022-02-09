@@ -9,7 +9,6 @@ import Navbar, { NavbarProps } from "./Layouts/Navbar/Navbar"
 
 export type LayoutProps = {
   id?: string
-  transparentUntil?: number
   bodyAttributes?: object
   blackBg?: boolean
   navbarProps?: NavbarProps //NavbarProps

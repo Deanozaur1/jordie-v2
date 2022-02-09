@@ -33,43 +33,42 @@ export const FeedRollRaw = ({ data }) => {
     </div>
   )
 }
-
-export default () => (
-  <StaticQuery
-    query={graphql`
-      query FeedRollQuery {
-        allMarkdownRemark(
-          sort: { order: DESC, fields: [frontmatter___date] }
-          filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
-          limit: 3
-        ) {
-          edges {
-            node {
-              excerpt(pruneLength: 400)
-              id
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-                templateKey
-                date(formatString: "MMMM DD, YYYY")
-                featuredpost
-                featuredimage {
-                  childImageSharp {
-                    gatsbyImageData(
-                      width: 200
-                      placeholder: BLURRED
-                      formats: [AUTO, WEBP, AVIF]
-                    )
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={(data) => <FeedRollRaw data={data} />}
-  />
-)
+export default FeedRollRaw
+// export default () => (
+//   <StaticQuery
+//     query={graphql`
+//       query FeedRollQuery {
+//         allMarkdownRemark(
+//           sort: { order: DESC, fields: [frontmatter___date] }
+//           filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
+//           limit: 3
+//         ) {
+//           edges {
+//             node {
+//               excerpt(pruneLength: 400)
+//               id
+//               fields {
+//                 slug
+//               }
+//               frontmatter {
+//                 title
+//                 templateKey
+//                 date(formatString: "MMMM DD, YYYY")
+//                 featuredimage {
+//                   childImageSharp {
+//                     gatsbyImageData(
+//                       width: 200
+//                       placeholder: BLURRED
+//                       formats: [AUTO, WEBP, AVIF]
+//                     )
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     `}
+//     render={(data) => <FeedRollRaw data={data} />}
+//   />
+// )
