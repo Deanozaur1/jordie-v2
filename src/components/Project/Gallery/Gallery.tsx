@@ -17,8 +17,8 @@ const Gallery: React.FC<GalleryProps> = ({
       {images?.map((image, index) => (
         <div className="p-gallery__item" key={index}>
           <Image
-            src={image.image}
-            alt={image.alt}
+            src={image.gatsbyImageData}
+            alt={image.title}
             style={{ height: 550, width: 550 }}
           />
         </div>

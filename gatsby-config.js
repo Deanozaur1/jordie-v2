@@ -1,4 +1,6 @@
+require("dotenv").config({ path: `.env` })
 const config = require("./config")
+
 const {
   NODE_ENV,
   URL: NETLIFY_SITE_URL = config.siteMetadata.siteUrl,
@@ -32,42 +34,41 @@ module.exports = {
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
-        query: `
-        {
+        query: `{
           allSitePage {
             nodes {
               path
             }
           }
-          allMarkdownRemark {
+          allContentfulProject {
             nodes {
-              frontmatter {
-                date
-                modifiedAt
-              }
-              fields {
-                slug
-              }
+              updatedAt
+              createdAt
+              slug
             }
           }
-        }
-      `,
+        }`,
         resolveSiteUrl: () => siteUrl,
         resolvePages: ({
           allSitePage: { nodes: allPages },
-          allMarkdownRemark: { nodes: allNodes },
+          allContentfulProject: { nodes: allProjectNodes },
         }) => {
-          const nodeMap = allNodes.reduce((acc, node) => {
-            const { slug } = node.fields
-            if (slug) acc[slug] = node.frontmatter
-            return acc
-          }, {})
+          const projectNodeMap = allProjectNodes.reduce(
+            (acc, { slug, ...rest }) => {
+              if (slug) acc["/portfolio/" + slug] = rest
+              return acc
+            },
+            {}
+          )
 
-          return allPages.map((page) => ({ ...page, ...nodeMap[page.path] }))
+          return allPages.map((page) => ({
+            ...page,
+            ...projectNodeMap[page.path],
+          }))
         },
-        serialize: ({ path: url, date, modifiedAt }) => ({
+        serialize: ({ path: url, updatedAt, createdAt }) => ({
           url,
-          lastmod: modifiedAt || date || new Date().toJSON(),
+          lastmod: updatedAt || createdAt || new Date().toJSON(),
         }),
       },
     },
@@ -119,6 +120,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },
+    {
       resolve: `gatsby-plugin-typescript`,
       options: {
         isTSX: true,
@@ -155,7 +163,6 @@ module.exports = {
         name: "pages",
       },
     },
-
     {
       resolve: "gatsby-transformer-remark",
       options: {
@@ -177,20 +184,20 @@ module.exports = {
 
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`, // Needed for dynamic images
-    {
-      resolve: `gatsby-plugin-netlify-cms-paths`,
-      options: {
-        // Path to your Netlify CMS config file
-        cmsConfig: `/static/admin/config.yml`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-netlify-cms-paths`,
+    //   options: {
+    //     // Path to your Netlify CMS config file
+    //     cmsConfig: `/static/admin/config.yml`,
+    //   },
+    // },
 
-    {
-      resolve: "gatsby-plugin-netlify-cms",
-      options: {
-        modulePath: `${__dirname}/src/cms/cms.ts`,
-      },
-    },
+    // {
+    //   resolve: "gatsby-plugin-netlify-cms",
+    //   options: {
+    //     modulePath: `${__dirname}/src/cms/cms.ts`,
+    //   },
+    // },
     {
       resolve: "gatsby-plugin-purgecss", // purges all unused/unreferenced css rules
       options: {

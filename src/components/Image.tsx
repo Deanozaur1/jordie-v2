@@ -3,6 +3,8 @@ import React, { CSSProperties, FunctionComponent } from "react"
 import { GatsbyImage, GatsbyImageProps, getImage } from "gatsby-plugin-image"
 import classNames from "classnames"
 
+
+
 type ImageProps = {
   src: any
   alt: string

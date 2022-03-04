@@ -11,17 +11,13 @@ import { Image, UiLink } from "../components"
 
 import "../styles/pages/project.scss"
 
-export type ProjectPageProps = {
-  pagination: {
-    next: Partial<Project>
-    prev: Partial<Project>
-  }
-} & PageProps<Project>
+export type Paginated<T = any> = { next: T; prev: T } & T
+
+export type ProjectPageProps = {} & PageProps<Paginated<Project>>
 
 export const ProjectTemplate: React.FC<ProjectPageProps> = ({
   helmet,
   data,
-  pagination,
 }) => {
   return (
     <React.Fragment>
@@ -34,33 +30,24 @@ export const ProjectTemplate: React.FC<ProjectPageProps> = ({
 
       <div className="project__container inner-container">
         <Gallery images={data.gallery} />
-        <Pagination data={pagination} />
+        <Pagination data={data} prefix="/portfolio" />
       </div>
     </React.Fragment>
   )
 }
 
-const ProjectPage: JordiePageFC = ({ data }) => {
-  console.log({ bigData: data })
-  const src = getSrc(data.project.frontmatter.featuredimage)
-
-  const mapPagination = (next, prev) => {
-    return {
-      next: next ? mapRemarkToPage(data.next) : null,
-      prev: prev ? mapRemarkToPage(data.prev) : null,
-    }
-  }
+const ProjectPage: JordiePageFC = ({ data: { current, next, prev } }) => {
+  const src = getSrc(current.featuredImage)
 
   return (
     <ProjectTemplate
-      data={mapRemarkToPage(data.project)}
-      pagination={mapPagination(data.next, data.prev)}
+      data={{ ...current, next, prev }}
       helmet={
         <Helmet titleTemplate={`${config.siteMetadata.shortName} - %s`}>
-          <title>{data.project.frontmatter.title}</title>
+          <title>{current.title}</title>
           <meta
             property="og:title"
-            content={`${config.siteMetadata.shortName} - ${data.project.frontmatter.title}`}
+            content={`${config.siteMetadata.shortName} - ${current.title}`}
           />
           <meta property="og:image" content={src} />
         </Helmet>
@@ -77,51 +64,39 @@ ProjectPage.layoutProps = {
 export default ProjectPage
 
 export const pageQuery = graphql`
-  query ProjectSlugQuery(
-    $id: String!
-    $previousPostId: String
-    $nextPostId: String
-  ) {
-    project: markdownRemark(id: { eq: $id }) {
-      id
-      fields {
-        slug
+  query ProjectSlugQuery($id: String!, $prevId: String, $nextId: String) {
+    current: contentfulProject(id: { eq: $id }) {
+      title
+      subtitle
+      brief {
+        raw
       }
-      frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+      featuredImage {
         title
-        subtitle
-        brief
-        platforms
-        gallery {
-          alt
-          image {
-            childImageSharp {
-              gatsbyImageData(
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: [AUTO, WEBP, AVIF]
-              )
-            }
-          }
-        }
+        description
+        gatsbyImageData(
+          layout: CONSTRAINED
+          placeholder: BLURRED
+          formats: [AUTO, WEBP, AVIF]
+        )
+      }
+      gallery {
+        title
+        description
+        gatsbyImageData(
+          layout: CONSTRAINED
+          placeholder: BLURRED
+          formats: [AUTO, WEBP, AVIF]
+        )
       }
     }
-    prev: markdownRemark(id: { eq: $previousPostId }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-      }
+    next: contentfulProject(id: { eq: $nextId }) {
+      title
+      slug
     }
-    next: markdownRemark(id: { eq: $nextPostId }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-      }
+    prev: contentfulProject(id: { eq: $prevId }) {
+      title
+      slug
     }
   }
 `

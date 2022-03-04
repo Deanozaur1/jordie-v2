@@ -1,5 +1,5 @@
 import React from "react"
-import { Homepage } from "../../../templates/index-page"
+import { Homepage } from "../../../pages"
 
 import "./Intro.scss"
 
@@ -12,7 +12,7 @@ const Intro: React.FC<IntroProps> = ({ data: { title, texts } }) => {
     <section className="intro container">
       <span className="intro__title">{title}</span>
 
-      {texts.map((text, i) => (
+      {texts.map(({ text: { text } }, i) => (
         <div className="intro__item" key={i}>
           <span className="intro__item-count text-symbol">{`0${i + 1}`}</span>
           <p className="intro__item-text font-primary text-head--small" key={i}>

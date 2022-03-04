@@ -1,7 +1,7 @@
 import React from "react"
 import classNames from "classnames"
 import { BaseProps } from "../../../@types"
-import { Homepage } from "../../../templates/index-page"
+import { Homepage } from "../../../pages"
 
 import "./About.scss"
 import { Image } from "../.."
@@ -39,9 +39,7 @@ const About: React.FC<AboutProps> = ({
             ))}
           </div>
 
-          <p className="about__briefs-text">
-            {briefs[briefSelection].text}
-          </p>
+          <p className="about__briefs-text">{briefs[briefSelection].text.text}</p>
         </div>
       </div>
     </div>

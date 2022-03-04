@@ -8,19 +8,18 @@ exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
     {
-      allMarkdownRemark(
-        sort: { order: ASC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
+      allContentfulProject(sort: { fields: gallery___createdAt }) {
         edges {
           node {
+            title
             id
-            fields {
-              slug
-            }
-            frontmatter {
-              templateKey
-            }
+            slug
+          }
+          next {
+            id
+          }
+          previous {
+            id
           }
         }
       }
@@ -31,67 +30,59 @@ exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors)
     }
 
-    const posts = result.data.allMarkdownRemark.edges
+    const contentfulProjects = result.data.allContentfulProject.edges
 
-    const allProjects = posts.filter(
-      (edge) => edge.node.frontmatter.templateKey === "project"
-    )
 
-    const getProjectPagination = (id) => {
-      const index = allProjects.findIndex((project) => project.node.id === id)
-      if (index === -1) return {}
-
-      const prev = index === 0 ? null : allProjects[index - 1]
-      const next =
-        index === allProjects.length - 1 ? null : allProjects[index + 1]
-
-      const protectReturn = (val) => {
-        if (!val) return null
-        // else if (val.node.id === id) return null
-        else return val.node.id
-      }
-
-      return {
-        previousPostId: protectReturn(prev),
-        nextPostId: protectReturn(next),
-      }
-    }
-
-    posts.forEach((edge, index) => {
+    contentfulProjects.forEach((edge) => {
       const id = edge.node.id
-      const templateKey = edge.node.frontmatter.templateKey
-      const isTargetedPost = Boolean(edge.node.frontmatter.targetUrl)
-
-      if (ignoredPaths.some((p) => templateKey.includes(p)) || isTargetedPost) {
-        return
-      }
-      let pagination = {}
-      if (templateKey === "project") {
-        pagination = getProjectPagination(id)
-      }
+      const slug = edge.node.slug
 
       createPage({
-        path: edge.node.fields.slug,
-        component: path.resolve(`src/templates/${String(templateKey)}.tsx`),
-        // additional data can be passed via context
+        path: `/portfolio/${slug}`,
+        component: path.resolve(`src/templates/project.tsx`),
         context: {
           id,
-          ...pagination,
+          nextId: edge.next?.id,
+          prevId: edge.previous?.id,
         },
       })
     })
+
+    // posts.forEach((edge, index) => {
+    //   const id = edge.node.id
+    //   const templateKey = edge.node.frontmatter.templateKey
+    //   const isTargetedPost = Boolean(edge.node.frontmatter.targetUrl)
+
+    //   if (ignoredPaths.some((p) => templateKey.includes(p)) || isTargetedPost) {
+    //     return
+    //   }
+    //   let pagination = {}
+    //   if (templateKey === "project") {
+    //     pagination = getProjectPagination(id)
+    //   }
+
+    //   createPage({
+    //     path: edge.node.fields.slug,
+    //     component: path.resolve(`src/templates/${String(templateKey)}.tsx`),
+    //     // additional data can be passed via context
+    //     context: {
+    //       id,
+    //       ...pagination,
+    //     },
+    //   })
+    // })
   })
 }
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+// exports.onCreateNode = ({ node, actions, getNode }) => {
+//   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
-  }
-}
+//   if (node.internal.type === `MarkdownRemark`) {
+//     const value = createFilePath({ node, getNode })
+//     createNodeField({
+//       name: `slug`,
+//       node,
+//       value,
+//     })
+//   }
+// }

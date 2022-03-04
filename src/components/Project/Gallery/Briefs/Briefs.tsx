@@ -9,7 +9,7 @@ const Briefs: React.FC<BriefsProps> = ({ data, className }: BriefsProps) => {
   const list: ItemType[] = [
     { title: "Name", text: data.title },
     { title: "Project", text: data.subtitle },
-    { title: "Platforms", text: data.platforms.join(", ") },
+    { title: "Platforms", text: data.platforms?.join(", ") },
     { title: "Brief", text: data.brief },
   ]
 

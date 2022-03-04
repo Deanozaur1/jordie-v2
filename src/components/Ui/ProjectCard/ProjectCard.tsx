@@ -24,7 +24,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         className,
       ])}
     >
-      <Image src={data.featuredimage} alt={alt} />
+      <Image src={data.featuredImage.gatsbyImageData} alt={alt} />
 
       <div className="p-card__body">
         <h3 className="p-card__title">{data.title}</h3>

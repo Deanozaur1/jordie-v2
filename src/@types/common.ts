@@ -1,8 +1,10 @@
+import { ContentfulImage } from './contentful';
 import React from 'react';
 import { PageProps } from "gatsby"
 import { LayoutProps } from '../components';
 
 export type JordiePageFC<T = any> = React.FC<Partial<PageProps<T>>> & { layoutProps?: LayoutProps }
+
 
 export interface ItemType {
   title: string
@@ -40,9 +42,9 @@ export type CmsItem = {
 export type Project = CmsItem & {
   title: string
   subtitle: string
-  platforms: string[]
-  brief: string
+  platforms: any
+  brief: any
   shortBrief: string
-  featuredimage: any
-  gallery: { image: any, alt: string }[]
+  featuredImage: ContentfulImage
+  gallery: { gatsbyImageData: any, description: string, title: string }[]
 }

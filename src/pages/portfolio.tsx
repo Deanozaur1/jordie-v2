@@ -45,7 +45,7 @@ const PortfolioPageTemplate: JordiePageFC<Project[]> = ({ data }) => {
 const PortfolioPage: JordiePageFC = ({ data, location }) => {
   return (
     <PortfolioPageTemplate
-      data={mapRemarkToPage(data.allMarkdownRemark)}
+      data={mapRemarkToPage(data.allContentfulProject)}
       location={location}
     />
   )
@@ -60,30 +60,28 @@ export default PortfolioPage
 
 export const pageQuery = graphql`
   query PortfolioTemplateQuery {
-    allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date] }
-      filter: { frontmatter: { templateKey: { eq: "project" } } }
+    allContentfulProject(
+      filter: { featuredProject: { eq: true } }
+      sort: { fields: gallery___createdAt, order: DESC }
     ) {
       edges {
         node {
           id
-          fields {
-            slug
+          slug
+          title
+          subtitle
+          brief {
+            raw
           }
-          frontmatter {
+          featuredImage {
             title
-            subtitle
-            shortBrief
-            featuredimage {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 550
-                  aspectRatio: 1
-                  placeholder: BLURRED
-                  formats: [AUTO, WEBP, AVIF]
-                )
-              }
-            }
+            description
+            gatsbyImageData(
+              width: 550
+              aspectRatio: 1
+              placeholder: BLURRED
+              formats: [AUTO, WEBP, AVIF]
+            )
           }
         }
       }

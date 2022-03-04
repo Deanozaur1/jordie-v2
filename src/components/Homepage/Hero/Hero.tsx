@@ -1,9 +1,14 @@
 import React from "react"
 import { Image } from "../.."
+import { ContentfulImage } from "../../../@types"
 
 import "./Hero.scss"
 
-const Hero: React.FC<any> = ({ image }) => {
+type HeroProps = {
+  image: ContentfulImage
+}
+
+const Hero: React.FC<HeroProps> = ({ image }) => {
   return (
     <header className="hero">
       <div className="hero__title-wrap">
@@ -16,9 +21,9 @@ const Hero: React.FC<any> = ({ image }) => {
 
       <div className="hero__bg">
         <Image
-          src={image}
-          alt="gal"
-          style={{ height: "100%",  }}
+          src={image.gatsbyImageData}
+          alt={image.title}
+          style={{ height: "100%" }}
           imgStyle={{ height: "100%", objectPosition: "50% 100%" }}
         />
       </div>
