@@ -1,7 +1,7 @@
 {
-  "name": "template-starter",
-  "description": "Example template starter description",
-  "version": "0.0.1",
+  "name": "JordieV2",
+  "description": "Jordie portfolio with content management system using Contentful CMS, Gatsby and Netlify",
+  "version": "1.0.1",
   "author": "Tomer Danan",
   "scripts": {
     "clean": "gatsby clean",
