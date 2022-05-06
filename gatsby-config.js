@@ -19,6 +19,8 @@ module.exports = {
   plugins: [
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sass",
+    `gatsby-plugin-emotion`,
+    `gatsby-plugin-polished`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

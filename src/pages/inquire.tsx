@@ -6,10 +6,16 @@ import { JordiePageFC } from "../@types"
 import { Image } from "../components"
 import { rcEncodeUri, useDidUpdateEffect } from "../hooks"
 import config from "../../config"
-import "../styles/pages/inquire.scss"
+import {
+  InquireBG,
+  InquireForm,
+  InquireFormFieldFlex,
+  InquireFormFieldInput,
+  InquireStyles,
+  InquireSubmit,
+} from "../styles/pages/inquire"
 
 const Inquire: JordiePageFC = ({ data }) => {
-  console.log(data)
   const [inquire, setInquire] = React.useState(null)
   const [completed, setCompleted] = React.useState(false)
   const [formError, setFormError] = React.useState(false)
@@ -53,10 +59,12 @@ const Inquire: JordiePageFC = ({ data }) => {
         <title>Inquire</title>
       </Helmet>
 
-      <Image src={data.bg} alt="background" containerClassName="inquire__bg" />
+      <InquireBG>
+        <Image src={data.bg} alt="background" />
+      </InquireBG>
 
-      <div className="form__container container">
-        <form
+      <div className="container">
+        <InquireForm
           name="inquire"
           method="post"
           className={classNames([
@@ -75,9 +83,9 @@ const Inquire: JordiePageFC = ({ data }) => {
               <input name="bot-field" onChange={handleChange} />
             </label>
           </div>
-          <div className="inquire__form-field inquire__form-field--flex">
+          <InquireFormFieldFlex>
             <input
-              className="inquire__form-field__input"
+              css={InquireFormFieldInput}
               type={"text"}
               name={"first_name"}
               id={"last_name"}
@@ -87,7 +95,7 @@ const Inquire: JordiePageFC = ({ data }) => {
               disabled={completed}
             />
             <input
-              className="inquire__form-field__input"
+              css={InquireFormFieldInput}
               type={"text"}
               name={"last_name"}
               id={"last_name"}
@@ -96,10 +104,10 @@ const Inquire: JordiePageFC = ({ data }) => {
               required={true}
               disabled={completed}
             />
-          </div>
-          <div className="inquire__form-field">
+          </InquireFormFieldFlex>
+          <div>
             <input
-              className="inquire__form-field__input"
+              css={InquireFormFieldInput}
               type={"email"}
               name={"email"}
               id={"email"}
@@ -109,9 +117,9 @@ const Inquire: JordiePageFC = ({ data }) => {
               disabled={completed}
             />
           </div>
-          <div className="inquire__form-field">
+          <div>
             <textarea
-              className="inquire__form-field__input"
+              css={InquireFormFieldInput}
               name={"message"}
               id={"message"}
               placeholder="Write me a message"
@@ -120,7 +128,7 @@ const Inquire: JordiePageFC = ({ data }) => {
               disabled={completed}
             />
           </div>
-          <div className="inquire__submit">
+          <InquireSubmit>
             {completed ? (
               <div className="form__complete">
                 <p>{completedText}</p>
@@ -134,16 +142,15 @@ const Inquire: JordiePageFC = ({ data }) => {
             >
               <span>{ctaText}</span>
             </button>
-          </div>
-        </form>
+          </InquireSubmit>
+        </InquireForm>
       </div>
     </React.Fragment>
   )
 }
 
 Inquire.layoutProps = {
-
-  className: "inquire",
+  pageStyle: InquireStyles,
 }
 
 export default Inquire

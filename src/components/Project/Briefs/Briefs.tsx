@@ -1,6 +1,12 @@
 import React from "react"
-import { BaseProps, ItemType, Project } from "../../../@types"
+import { BaseProps, Project } from "../../../@types"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
+import {
+  BriefsContainer,
+  BriefDescription,
+  Brief,
+  BriefName,
+} from "./Briefs.emotion"
 
 type BriefsProps = {
   data: Partial<Project>
@@ -18,17 +24,17 @@ const Briefs: React.FC<BriefsProps> = ({ data, className }: BriefsProps) => {
   ]
 
   return !list?.length ? null : (
-    <main className="project__brief inner-container">
+    <BriefsContainer className="inner-container">
       {list.map(
         ({ title, text }, index) =>
           text && (
-            <div className="brief" key={title + index}>
-              <div className="brief__name">{title}</div>
-              <div className="brief__description">{text}</div>
-            </div>
+            <Brief key={title + index}>
+              <BriefName>{title}</BriefName>
+              <BriefDescription>{text}</BriefDescription>
+            </Brief>
           )
       )}
-    </main>
+    </BriefsContainer>
   )
 }
 

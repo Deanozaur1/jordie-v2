@@ -1,7 +1,14 @@
 import React from "react"
 import { UiLink } from "../.."
 import { LinkType } from "../../../@types"
-import "./Footer.scss"
+import {
+  FooterContainer,
+  FooterCopyright,
+  FooterMap,
+  FooterMapWrap,
+  FooterSection,
+  FooterSocialLinks,
+} from "./Footer.emotion"
 
 type FooterProps = {
   className?: string
@@ -23,32 +30,32 @@ const Footer: React.FC<FooterProps> = ({ className }: FooterProps) => {
     { text: "Portfolio", url: "/portfolio" },
   ]
   return (
-    <footer className="footer">
-      <div className="footer__container container">
-        <div className="footer__social-links">
+    <FooterSection>
+      <FooterContainer className="container">
+        <FooterSocialLinks>
           {socialLinks.map(({ text, url }, index) => (
-            <UiLink key={index} to={url} className="footer__social-link">
+            <UiLink key={index} to={url}>
               {text}
             </UiLink>
           ))}
-        </div>
+        </FooterSocialLinks>
 
-        <div className="footer__copy">
+        <FooterCopyright>
           <p>&copy; {new Date().getFullYear()} Jordie Studio</p>
           <p>All Right Reserved</p>
-        </div>
+        </FooterCopyright>
 
-        <div className="footer__map">
-          <div className="footer__map-wrap">
+        <FooterMap>
+          <div css={FooterMapWrap}>
             {mapLinks.map(({ text, url }, index) => (
-              <UiLink key={index} to={url} className="footer__map-link">
+              <UiLink key={index} to={url}>
                 {text}
               </UiLink>
             ))}
           </div>
-        </div>
-      </div>
-    </footer>
+        </FooterMap>
+      </FooterContainer>
+    </FooterSection>
   )
 }
 

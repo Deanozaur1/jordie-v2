@@ -2,8 +2,9 @@ import React from "react"
 import classNames from "classnames"
 import { BaseProps } from "../../../@types"
 import { JordieStudioLogo, UiLink } from "../.."
+import { Nav, NavItem, NavLinks } from "./Navbar.emotion"
+import { mq } from "../../../styles/emotion"
 
-import "./Navbar.scss"
 
 export type NavbarProps = {
   light?: boolean
@@ -17,26 +18,28 @@ const Navbar: React.FC<NavbarProps> = ({ light, className }: NavbarProps) => {
   ]
 
   return (
-    <nav
-      className={classNames([
-        "nav container",
-        {
-          "nav--light": light,
-        },
-      ])}
-    >
-      <UiLink to="/">
-        <JordieStudioLogo className="nav__logo" width="200" />
+    <Nav className={classNames(["container"])} light={light}>
+      <UiLink to="/" className="nav__logo">
+        <JordieStudioLogo
+          css={{
+            width: "200px",
+            height: "60px",
+            [mq("md")]: {
+              height: "48px",
+              width: "auto",
+            },
+          }}
+        />
       </UiLink>
 
-      <ul className="nav__links">
+      <NavLinks>
         {links.map(({ text, url }, index) => (
-          <li className="nav__item" key={index}>
+          <NavItem key={index}>
             <UiLink to={url}>{text}</UiLink>
-          </li>
+          </NavItem>
         ))}
-      </ul>
-    </nav>
+      </NavLinks>
+    </Nav>
   )
 }
 

@@ -6,12 +6,10 @@ import { mapRemarkToPage } from "../hooks"
 import { StaticImage } from "gatsby-plugin-image"
 import { ProjectCard } from "../components"
 import config from "../../config"
-
-import "../styles/pages/portfolio.scss"
 import { Helmet } from "react-helmet"
+import { PortfolioContainer, PortfolioProjects, PortfolioStyles } from "../styles/pages/portfolio"
 
 const PortfolioPageTemplate: JordiePageFC<Project[]> = ({ data }) => {
-  console.log({ data })
   return (
     <>
       <Helmet titleTemplate={`${config.siteMetadata.shortName} - %s`}>
@@ -27,8 +25,8 @@ const PortfolioPageTemplate: JordiePageFC<Project[]> = ({ data }) => {
         />
       </div>
 
-      <div className="portfolio__container inner-container">
-        <div className="portfolio__projects">
+      <PortfolioContainer className="inner-container">
+        <PortfolioProjects>
           {data.map((project, i) => (
             <ProjectCard
               key={project.id + i}
@@ -36,8 +34,8 @@ const PortfolioPageTemplate: JordiePageFC<Project[]> = ({ data }) => {
               reversed={Boolean(i % 2)}
             />
           ))}
-        </div>
-      </div>
+        </PortfolioProjects>
+      </PortfolioContainer>
     </>
   )
 }
@@ -54,6 +52,7 @@ const PortfolioPage: JordiePageFC = ({ data, location }) => {
 PortfolioPage.layoutProps = {
   className: "portfolio",
   blackBg: true,
+  pageStyle: PortfolioStyles
 }
 
 export default PortfolioPage

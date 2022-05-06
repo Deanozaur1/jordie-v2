@@ -31,7 +31,7 @@ const BTLink: React.FC<BTLinkProps> = ({
 
     case !isUrl(to) && notEmpty(to):
       return (
-        <Link className={className} to={to} {...(otherProps as any)}>
+        <Link className={className} to={to} {...(otherProps as any)} activeClassName="current-page">
           {children}
         </Link>
       )

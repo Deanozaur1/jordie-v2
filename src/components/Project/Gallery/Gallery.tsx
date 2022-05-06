@@ -1,29 +1,21 @@
 import React from "react"
-import classNames from "classnames"
 import { BaseProps, Project } from "../../../@types"
+import { GalleryContainer, GalleryImage } from "./Gallery.emotion"
 import { Image } from "../.."
 
-type GalleryProps = {
-  images: Project["gallery"]
-} & BaseProps
+type GalleryProps = { images: Project["gallery"] } & BaseProps
 
-const Gallery: React.FC<GalleryProps> = ({
-  images,
-  className,
-}: GalleryProps) => {
-  console.log(images)
+const Gallery: React.FC<GalleryProps> = ({ images }: GalleryProps) => {
+  if (!images?.length) return null
+
   return (
-    <div className={classNames(["p-gallery", className])}>
+    <GalleryContainer>
       {images?.map((image, index) => (
-        <div className="p-gallery__item" key={index}>
-          <Image
-            src={image.gatsbyImageData}
-            alt={image.title}
-            style={{ height: 550, width: 550 }}
-          />
-        </div>
+        <GalleryImage key={index}>
+          <Image src={image.gatsbyImageData} alt={image.title} />
+        </GalleryImage>
       ))}
-    </div>
+    </GalleryContainer>
   )
 }
 

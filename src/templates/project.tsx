@@ -1,17 +1,16 @@
 import React from "react"
-import classNames from "classnames"
 import config from "../../config"
 import { Helmet } from "react-helmet"
 import { graphql } from "gatsby"
 import { getSrc } from "gatsby-plugin-image"
-import { JordiePageFC, PageProps, Project } from "../@types"
-import { mapRemarkToPage } from "../hooks"
+import { JordiePageFC, PageProps, Paginated, Project } from "../@types"
 import { Briefs, Pagination, Gallery } from "../components/Project"
-import { Image, UiLink } from "../components"
 
-import "../styles/pages/project.scss"
-
-export type Paginated<T = any> = { next: T; prev: T } & T
+import {
+  ProjectHeader,
+  ProjectPageContainer,
+  ProjectPageWrapper,
+} from "../styles/pages/project"
 
 export type ProjectPageProps = {} & PageProps<Paginated<Project>>
 
@@ -23,15 +22,16 @@ export const ProjectTemplate: React.FC<ProjectPageProps> = ({
     <React.Fragment>
       {helmet || ""}
 
-      <header className="project__header">
+      <ProjectHeader>
         <h1 className="head-2">{data.title}</h1>
-      </header>
+      </ProjectHeader>
+
       <Briefs data={data} />
 
-      <div className="project__container inner-container">
+      <ProjectPageContainer className="inner-container">
         <Gallery images={data.gallery} />
         <Pagination data={data} prefix="/portfolio" />
-      </div>
+      </ProjectPageContainer>
     </React.Fragment>
   )
 }
@@ -57,7 +57,7 @@ const ProjectPage: JordiePageFC = ({ data: { current, next, prev } }) => {
 }
 
 ProjectPage.layoutProps = {
-  className: "project",
+  pageStyle: ProjectPageWrapper,
   blackBg: true,
 }
 

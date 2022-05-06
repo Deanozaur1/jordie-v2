@@ -1,5 +1,6 @@
 {
   "include": ["./src/**/*"],
+  "types": ["node", "@emotion/core"],
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",

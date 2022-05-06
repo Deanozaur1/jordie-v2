@@ -1,10 +1,11 @@
-import { ContentfulImage } from './contentful';
-import React from 'react';
+import { ContentfulImage } from "./contentful"
+import React from "react"
 import { PageProps } from "gatsby"
-import { LayoutProps } from '../components';
+import { LayoutProps } from "../components"
 
-export type JordiePageFC<T = any> = React.FC<Partial<PageProps<T>>> & { layoutProps?: LayoutProps }
-
+export type JordiePageFC<T = any> = React.FC<Partial<PageProps<T>>> & {
+  layoutProps?: Partial<LayoutProps>
+}
 
 export interface ItemType {
   title: string
@@ -29,6 +30,7 @@ export type CardType = {
   targetUrl?: string
 }
 
+export type Paginated<T = any> = { next: T; prev: T } & T
 
 export type CmsItem = {
   id: string
@@ -46,5 +48,5 @@ export type Project = CmsItem & {
   brief: any
   shortBrief: string
   featuredImage: ContentfulImage
-  gallery: { gatsbyImageData: any, description: string, title: string }[]
+  gallery: { gatsbyImageData: any; description: string; title: string }[]
 }

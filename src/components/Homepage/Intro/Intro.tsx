@@ -1,7 +1,12 @@
 import React from "react"
 import { Homepage } from "../../../pages"
-
-import "./Intro.scss"
+import {
+  IntroItem,
+  IntroItemCount,
+  IntroItemText,
+  IntroSection,
+  IntroTitle,
+} from "./Intro.emotion"
 
 type IntroProps = {
   data: Homepage["intro"]
@@ -9,18 +14,18 @@ type IntroProps = {
 
 const Intro: React.FC<IntroProps> = ({ data: { title, texts } }) => {
   return (
-    <section className="intro container">
-      <span className="intro__title">{title}</span>
+    <IntroSection className="container">
+      <IntroTitle>{title}</IntroTitle>
 
       {texts.map(({ text: { text } }, i) => (
-        <div className="intro__item" key={i}>
-          <span className="intro__item-count text-symbol">{`0${i + 1}`}</span>
-          <p className="intro__item-text font-primary text-head--small" key={i}>
+        <IntroItem key={i}>
+          <IntroItemCount className="text-symbol">{`0${i + 1}`}</IntroItemCount>
+          <IntroItemText className="font-primary text-head--small" key={i}>
             {text}
-          </p>
-        </div>
+          </IntroItemText>
+        </IntroItem>
       ))}
-    </section>
+    </IntroSection>
   )
 }
 

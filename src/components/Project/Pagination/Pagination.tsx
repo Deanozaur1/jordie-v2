@@ -1,8 +1,7 @@
 import React from "react"
-import classNames from "classnames"
-import { BaseProps, Project } from "../../../@types"
-import { Image, UiLink } from "../.."
-import { Paginated, ProjectPageProps } from "../../../templates/project"
+import { BaseProps, Paginated, Project } from "../../../@types"
+import { UiLink } from "../.."
+import { PaginationContainer, PagiNext, PagiPrev } from "./Pagination.emotion"
 
 type PaginationProps = {
   data: Paginated<Project>
@@ -15,18 +14,18 @@ const Pagination: React.FC<PaginationProps> = ({
   prefix,
 }: PaginationProps) => {
   return (
-    <div className={classNames(["p-navigation", className])}>
+    <PaginationContainer>
       {data.prev?.slug && (
-        <UiLink to={[prefix, data.prev.slug].join("/")} className="nav-prev">
+        <UiLink to={[prefix, data.prev.slug].join("/")} css={PagiPrev}>
           {data.prev.title}
         </UiLink>
       )}
       {data.next?.slug && (
-        <UiLink to={[prefix, data.next.slug].join("/")} className="nav-next">
+        <UiLink to={[prefix, data.next.slug].join("/")} css={PagiNext}>
           {data.next.title}
         </UiLink>
       )}
-    </div>
+    </PaginationContainer>
   )
 }
 
