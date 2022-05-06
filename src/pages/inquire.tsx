@@ -26,8 +26,10 @@ const Inquire: JordiePageFC = ({ data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!inquire || !inquire.name || !inquire.email) return
+    if (!inquire || !inquire.first_name || !inquire.email) return
+
     const form = e.target
+
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
