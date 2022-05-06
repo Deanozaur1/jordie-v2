@@ -4,7 +4,7 @@ import { BaseProps } from "../../../@types"
 import { JordieStudioLogo, UiLink } from "../.."
 import { Nav, NavItem, NavLinks } from "./Navbar.emotion"
 import { mq } from "../../../styles/emotion"
-
+import { UiLineLink } from "../../UiLink"
 
 export type NavbarProps = {
   light?: boolean
@@ -35,7 +35,9 @@ const Navbar: React.FC<NavbarProps> = ({ light, className }: NavbarProps) => {
       <NavLinks>
         {links.map(({ text, url }, index) => (
           <NavItem key={index}>
-            <UiLink to={url}>{text}</UiLink>
+            <UiLineLink to={url} dataText={text}>
+              {text}
+            </UiLineLink>
           </NavItem>
         ))}
       </NavLinks>

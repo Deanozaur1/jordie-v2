@@ -11,19 +11,6 @@ export const NavItem = styled("li")`
   margin: 0;
   text-transform: uppercase;
 
-  a {
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-    &.current-page {
-      font-weight: bold;
-      pointer-events: none;
-    }
-  }
-
   & + & {
     margin-left: 6.5rem;
   }

@@ -92,14 +92,17 @@ export const FooterMapWrap = css`
   max-width: 250px;
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem 2rem;
+  .line-link::after {
+    text-align: start;
+  }
+
   & > * {
-    flex: 0 0 50%;
+    flex: 0 0 calc(50% - 2rem);
   }
 
   ${mq("<md")} {
     max-width: unset;
-
-    gap: 1rem;
 
     & > * {
       flex: 1;

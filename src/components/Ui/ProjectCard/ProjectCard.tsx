@@ -2,6 +2,7 @@ import React from "react"
 import { BaseProps, Project } from "../../../@types"
 import { Image, UiLink } from "../.."
 import { ProjectCardBody, ProjectCardWrap } from "./ProjectCard.emotion"
+import { UiLineLink } from "../../UiLink"
 
 type ProjectCardProps = {
   data: Project
@@ -23,7 +24,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <p className="p-card__subtitle">{data.subtitle}</p>
         <p className="p-card__description">{data.shortBrief}</p>
 
-        <UiLink to={data.slug}>WATCH</UiLink>
+        <UiLineLink to={data.slug} dataText={"WATCH"}>
+          WATCH
+        </UiLineLink>
       </ProjectCardBody>
     </ProjectCardWrap>
   )

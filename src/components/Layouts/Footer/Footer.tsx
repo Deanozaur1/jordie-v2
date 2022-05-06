@@ -1,6 +1,7 @@
 import React from "react"
 import { UiLink } from "../.."
 import { LinkType } from "../../../@types"
+import { UiLineLink } from "../../UiLink"
 import {
   FooterContainer,
   FooterCopyright,
@@ -34,9 +35,9 @@ const Footer: React.FC<FooterProps> = ({ className }: FooterProps) => {
       <FooterContainer className="container">
         <FooterSocialLinks>
           {socialLinks.map(({ text, url }, index) => (
-            <UiLink key={index} to={url}>
+            <UiLineLink key={index} to={url} dataText={text}>
               {text}
-            </UiLink>
+            </UiLineLink>
           ))}
         </FooterSocialLinks>
 
@@ -48,9 +49,9 @@ const Footer: React.FC<FooterProps> = ({ className }: FooterProps) => {
         <FooterMap>
           <div css={FooterMapWrap}>
             {mapLinks.map(({ text, url }, index) => (
-              <UiLink key={index} to={url}>
+              <UiLineLink key={index} to={url} dataText={text}>
                 {text}
-              </UiLink>
+              </UiLineLink>
             ))}
           </div>
         </FooterMap>

@@ -1,22 +1,27 @@
 import React from "react"
 import { isUrl } from "../hooks"
 import { GatsbyLinkProps, Link } from "gatsby"
+import classNames from "classnames"
 
-type BTLinkProps = {
+type UiLinkProps = {
   to: string
   disabled?: boolean
   className?: string
 } & Partial<GatsbyLinkProps<any>>
 
-const BTLink: React.FC<BTLinkProps> = ({
+const UiLink: React.FC<UiLinkProps> = ({
   to,
   children,
   className,
   disabled,
   ...otherProps
 }) => {
+  const defaults = {
+    className,
+    ...otherProps,
+  }
   const notEmpty = (v: string) => !!v && v !== "#"
-  const TextLink = <b className={className}>{children}</b>
+  const TextLink = <b {...defaults}>{children}</b>
 
   switch (true) {
     case disabled:
@@ -24,14 +29,14 @@ const BTLink: React.FC<BTLinkProps> = ({
 
     case isUrl(to):
       return (
-        <a className={className} href={to} target="_blank" rel="noopener">
+        <a {...defaults} href={to} target="_blank" rel="noopener">
           {children}
         </a>
       )
 
     case !isUrl(to) && notEmpty(to):
       return (
-        <Link className={className} to={to} {...(otherProps as any)} activeClassName="current-page">
+        <Link to={to} {...(defaults as any)}>
           {children}
         </Link>
       )
@@ -41,4 +46,21 @@ const BTLink: React.FC<BTLinkProps> = ({
   }
 }
 
-export default BTLink
+type UiLineLinkProps = { dataText: string } & UiLinkProps
+
+export const UiLineLink: React.FC<UiLineLinkProps> = (props) => {
+  const { to, dataText, children, ...otherProps } = props
+  return (
+    <UiLink
+      to={to}
+      className={"line-link"}
+      activeClassName={"line-link--active"}
+      data-text={dataText}
+      {...otherProps}
+    >
+      <span>{children}</span>
+    </UiLink>
+  )
+}
+
+export default UiLink
