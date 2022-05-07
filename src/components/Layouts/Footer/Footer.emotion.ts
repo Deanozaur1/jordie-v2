@@ -106,7 +106,7 @@ export const FooterMapWrap = css`
     max-width: unset;
 
     & > * {
-      flex: 1;
+      flex: auto;
     }
   }
 
