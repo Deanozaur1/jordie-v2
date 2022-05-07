@@ -2,6 +2,7 @@ import { mq } from "./breakpoints"
 import { css } from "@emotion/react"
 import { darken } from "polished"
 import noise from "../../../static/img/media/noise.gif"
+import { Transition, Variants } from "framer-motion"
 // Colors
 export const $dark = "#463f3a"
 export const $black = "#111"
@@ -20,6 +21,17 @@ export const $projectImgWidth = "550px"
 export const $projectPadding = "4rem"
 export const $projectSpaceBetween = "5rem"
 export const $projectMaxWidth = `calc(1100px + ${$projectSpaceBetween} + ${$projectPadding})`
+
+export const createVariants = (
+  variants: Variants,
+  transition?: Transition
+) => ({
+  initial: "initial",
+  animate: "animate",
+  exit: "exit",
+  variants,
+  transition,
+})
 
 export const globalStyles = css`
   @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;700&display=swap");
@@ -207,3 +219,36 @@ export const globalStyles = css`
     }
   }
 `
+
+export const listVariants = createVariants({
+  initial: { transition: { staggerChildren: 0.09 } },
+  animate: { transition: { staggerChildren: 0.09 } },
+  exit: { transition: { staggerChildren: 0 } },
+})
+
+export const itemSlideVariants = {
+  initial: { y: 20, opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  exit: { y: -20, opacity: 0 },
+}
+export const itemFadeVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+}
+
+export const BGVariants = (blur = true) =>
+  createVariants({
+    initial: {
+      ...(blur ? { filter: "blur(50px)" } : {}),
+      opacity: 0,
+    },
+    animate: {
+      ...(blur ? { filter: "blur(0px)" } : {}),
+      opacity: 1,
+      transition: { duration: 1 },
+    },
+    exit: {
+      opacity: 0,
+    },
+  })

@@ -6,7 +6,10 @@ import {
   BriefDescription,
   Brief,
   BriefName,
+  breifsVariants,
+  breifsItemVariants,
 } from "./Briefs.emotion"
+import { itemSlideVariants, listVariants } from "../../../styles/emotion"
 
 type BriefsProps = {
   data: Partial<Project>
@@ -24,11 +27,11 @@ const Briefs: React.FC<BriefsProps> = ({ data, className }: BriefsProps) => {
   ]
 
   return !list?.length ? null : (
-    <BriefsContainer className="inner-container">
+    <BriefsContainer className="inner-container" {...listVariants}>
       {list.map(
         ({ title, text }, index) =>
           text && (
-            <Brief key={title + index}>
+            <Brief key={title + index} variants={itemSlideVariants}>
               <BriefName>{title}</BriefName>
               <BriefDescription>{text}</BriefDescription>
             </Brief>

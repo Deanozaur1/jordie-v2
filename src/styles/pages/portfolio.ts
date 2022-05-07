@@ -1,9 +1,10 @@
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
+import { motion } from "framer-motion"
 import { Image, ProjectCardStyles } from "../../components"
-import { $innerMaxWidth, mq } from "../emotion"
+import { $innerMaxWidth, createVariants, mq } from "../emotion"
 
-export const PortfolioStyles = css`
+export const PortfolioPageWrapper = styled.div`
   display: grid;
 
   & > * {
@@ -20,7 +21,7 @@ export const PortfolioContainer = styled.div`
   max-width: calc(${$innerMaxWidth} * 0.8) !important;
 `
 
-export const PortfolioProjects = styled.div`
+export const PortfolioProjects = motion(styled.div`
   --project-padding: 12rem;
 
   ${mq("<md")} {
@@ -40,4 +41,34 @@ export const PortfolioProjects = styled.div`
       margin-bottom: calc(var(--project-padding) / 2);
     }
   }
-`
+`)
+
+
+
+export const portfolioVariants = createVariants({
+  initial: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+  exit: {},
+})
+export const pCardVariants = {
+  initial: {
+    opacity: 0,
+    y: 20,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+  },
+  exit: {
+    opacity: 0,
+    y: 20,
+  },
+}

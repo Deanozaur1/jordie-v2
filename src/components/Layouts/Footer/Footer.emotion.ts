@@ -1,10 +1,11 @@
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 import { UiLink } from "../.."
-import { $bg, $bodyText, $footerHeight, mq } from "../../../styles/emotion"
+import { $bg, $bodyText, $dark, $footerHeight, mq } from "../../../styles/emotion"
 
 export const FooterSection = styled.footer`
   background-color: ${$bg};
+  color: ${$dark};
   min-height: ${$footerHeight};
   max-height: ${$footerHeight};
   margin-top: auto;
@@ -74,7 +75,7 @@ export const FooterCopyright = styled.div`
 
     & > * {
       font-size: 0.875rem;
-      opacity: 0.65;
+      opacity: 0.85;
     }
   }
 `

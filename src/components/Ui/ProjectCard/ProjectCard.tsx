@@ -9,27 +9,25 @@ type ProjectCardProps = {
   reversed?: boolean
 } & BaseProps
 
-const ProjectCard: React.FC<ProjectCardProps> = ({
-  data,
-  reversed,
-  className,
-}: ProjectCardProps) => {
-  const alt = `${data.subtitle}: ${data.title}`
-  return (
-    <ProjectCardWrap reversed={reversed}>
-      <Image src={data.featuredImage.gatsbyImageData} alt={alt} />
+const ProjectCard: React.FC<ProjectCardProps> = React.forwardRef(
+  ({ data, reversed }: ProjectCardProps, ref) => {
+    const alt = `${data.subtitle}: ${data.title}`
+    return (
+      <ProjectCardWrap reversed={reversed} ref={ref}>
+        <Image src={data.featuredImage.gatsbyImageData} alt={alt} />
 
-      <ProjectCardBody>
-        <h3 className="p-card__title">{data.title}</h3>
-        <p className="p-card__subtitle">{data.subtitle}</p>
-        <p className="p-card__description">{data.shortBrief}</p>
+        <ProjectCardBody>
+          <h3 className="p-card__title">{data.title}</h3>
+          <p className="p-card__subtitle">{data.subtitle}</p>
+          <p className="p-card__description">{data.shortBrief}</p>
 
-        <UiLineLink to={data.slug} dataText={"WATCH"}>
-          WATCH
-        </UiLineLink>
-      </ProjectCardBody>
-    </ProjectCardWrap>
-  )
-}
+          <UiLineLink to={data.slug} dataText={"WATCH"}>
+            WATCH
+          </UiLineLink>
+        </ProjectCardBody>
+      </ProjectCardWrap>
+    )
+  }
+)
 
 export default ProjectCard

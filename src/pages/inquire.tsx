@@ -11,10 +11,11 @@ import {
   InquireForm,
   InquireFormFieldFlex,
   InquireFormFieldInput,
-  InquireStyles,
+  InquirePageWrapper,
   InquireSubmit,
 } from "../styles/pages/inquire"
-
+import { BGVariants, itemSlideVariants, listVariants } from "../styles/emotion"
+import { motion } from "framer-motion"
 const Inquire: JordiePageFC = ({ data }) => {
   const [inquire, setInquire] = React.useState(null)
   const [completed, setCompleted] = React.useState(false)
@@ -56,16 +57,16 @@ const Inquire: JordiePageFC = ({ data }) => {
   }
 
   return (
-    <React.Fragment>
+    <InquirePageWrapper>
       <Helmet titleTemplate={`${config.siteMetadata.shortName} - %s`}>
         <title>Inquire</title>
       </Helmet>
 
-      <InquireBG>
+      <InquireBG {...BGVariants(false)}>
         <Image src={data.bg} alt="background" />
       </InquireBG>
 
-      <div className="container">
+      <div className="container" css={{ zIndex: 3 }}>
         <InquireForm
           name="inquire"
           method="post"
@@ -76,6 +77,7 @@ const Inquire: JordiePageFC = ({ data }) => {
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
+          {...listVariants}
         >
           {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
           <input type="hidden" name="form-name" value="inquire" />
@@ -85,8 +87,9 @@ const Inquire: JordiePageFC = ({ data }) => {
               <input name="bot-field" onChange={handleChange} />
             </label>
           </div>
-          <InquireFormFieldFlex>
-            <input
+
+          <InquireFormFieldFlex variants={itemSlideVariants}>
+            <motion.input
               css={InquireFormFieldInput}
               type={"text"}
               name={"first_name"}
@@ -96,7 +99,7 @@ const Inquire: JordiePageFC = ({ data }) => {
               required={true}
               disabled={completed}
             />
-            <input
+            <motion.input
               css={InquireFormFieldInput}
               type={"text"}
               name={"last_name"}
@@ -107,8 +110,9 @@ const Inquire: JordiePageFC = ({ data }) => {
               disabled={completed}
             />
           </InquireFormFieldFlex>
-          <div>
-            <input
+
+          <motion.div variants={itemSlideVariants}>
+            <motion.input
               css={InquireFormFieldInput}
               type={"email"}
               name={"email"}
@@ -118,9 +122,9 @@ const Inquire: JordiePageFC = ({ data }) => {
               required={true}
               disabled={completed}
             />
-          </div>
-          <div>
-            <textarea
+          </motion.div>
+          <motion.div variants={itemSlideVariants}>
+            <motion.textarea
               css={InquireFormFieldInput}
               name={"message"}
               id={"message"}
@@ -129,30 +133,30 @@ const Inquire: JordiePageFC = ({ data }) => {
               required={true}
               disabled={completed}
             />
-          </div>
-          <InquireSubmit>
+          </motion.div>
+          <InquireSubmit variants={itemSlideVariants}>
             {completed ? (
               <div className="form__complete">
                 <p>{completedText}</p>
               </div>
             ) : null}
-            <button
+            <motion.button
               type="submit"
               data-text={ctaText}
               disabled={completed}
               className="line-link"
             >
               <span>{ctaText}</span>
-            </button>
+            </motion.button>
           </InquireSubmit>
         </InquireForm>
       </div>
-    </React.Fragment>
+    </InquirePageWrapper>
   )
 }
 
 Inquire.layoutProps = {
-  pageStyle: InquireStyles,
+  transparentBg: true,
 }
 
 export default Inquire

@@ -1,9 +1,10 @@
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
+import { motion } from "framer-motion"
 import { Image } from "../../components"
 import { mq } from "../emotion"
 
-export const InquireStyles = css`
+export const InquirePageWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -14,24 +15,24 @@ export const InquireStyles = css`
     max-width: 960px;
   }
 `
-export const InquireBG = styled.div`
+export const InquireBG = motion(styled.div`
   .ui-image {
     height: 100vh;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: 0;
     background-color: #d6d6d6;
   }
-`
-export const InquireForm = styled.form`
+`)
+export const InquireForm = motion(styled.form`
   display: flex;
   flex-direction: column;
   gap: 3.5rem;
   color: currentColor;
-`
-export const InquireFormFieldFlex = styled.div`
+`)
+export const InquireFormFieldFlex = motion(styled.div`
   display: flex;
   justify-content: space-between;
   & > * {
@@ -45,7 +46,7 @@ export const InquireFormFieldFlex = styled.div`
       flex: 1;
     }
   }
-`
+`)
 export const InquireFormFieldInput = css`
   outline: none;
   background-color: transparent;
@@ -67,7 +68,7 @@ export const InquireFormFieldInput = css`
     opacity: 0.5;
   }
 `
-export const InquireSubmit = styled.div`
+export const InquireSubmit = motion(styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,4 +85,4 @@ export const InquireSubmit = styled.div`
   p {
     margin-bottom: 0;
   }
-`
+`)

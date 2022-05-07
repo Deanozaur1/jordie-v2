@@ -19,7 +19,7 @@ const Navbar: React.FC<NavbarProps> = ({ light, className }: NavbarProps) => {
 
   return (
     <Nav className={classNames(["container"])} light={light}>
-      <UiLink to="/" className="nav__logo">
+      <UiLink to="/" className="nav__logo" aria-label="Go to homepage link">
         <JordieStudioLogo
           css={{
             width: "200px",

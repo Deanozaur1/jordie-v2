@@ -39,6 +39,8 @@ export type CmsItem = {
   slug: string
   date: Date
   modifiedAt: Date
+  createdAt: string | Date
+  updatedAt: string | Date
 }
 
 export type Project = CmsItem & {

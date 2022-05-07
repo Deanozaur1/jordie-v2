@@ -1,4 +1,3 @@
-
 @import "./import";
 @import "./settings/typography";
 @import "./ui";
@@ -22,6 +21,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
   .footer {
     flex: 0 1 $footer-height;
     margin-top: auto;
@@ -64,6 +64,7 @@ body {
 
 .jordie {
   overflow: hidden;
+  position: relative;
 }
 .section {
   min-height: 80vh;
@@ -72,6 +73,7 @@ body {
 .black-bg {
   background-color: $black;
 }
+
 .white-text {
   &,
   input,

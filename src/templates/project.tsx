@@ -5,8 +5,9 @@ import { graphql } from "gatsby"
 import { getSrc } from "gatsby-plugin-image"
 import { JordiePageFC, PageProps, Paginated, Project } from "../@types"
 import { Briefs, Pagination, Gallery } from "../components/Project"
-
+import { AnimatePresence, motion } from "framer-motion"
 import {
+  headerVariants,
   ProjectHeader,
   ProjectPageContainer,
   ProjectPageWrapper,
@@ -19,20 +20,19 @@ export const ProjectTemplate: React.FC<ProjectPageProps> = ({
   data,
 }) => {
   return (
-    <React.Fragment>
+    <ProjectPageWrapper>
       {helmet || ""}
-
       <ProjectHeader>
-        <h1 className="head-2">{data.title}</h1>
+        <motion.h1 className="head-2" {...headerVariants}>
+          {data.title}
+        </motion.h1>
       </ProjectHeader>
-
       <Briefs data={data} />
-
       <ProjectPageContainer className="inner-container">
         <Gallery images={data.gallery} />
         <Pagination data={data} prefix="/portfolio" />
       </ProjectPageContainer>
-    </React.Fragment>
+    </ProjectPageWrapper>
   )
 }
 
@@ -57,8 +57,17 @@ const ProjectPage: JordiePageFC = ({ data: { current, next, prev } }) => {
 }
 
 ProjectPage.layoutProps = {
-  pageStyle: ProjectPageWrapper,
   blackBg: true,
+  pageVariants: {
+    hidden: {
+      opacity: 0,
+      y: "100px",
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+    },
+  },
 }
 
 export default ProjectPage
@@ -71,12 +80,13 @@ export const pageQuery = graphql`
       brief {
         raw
       }
+      updatedAt(fromNow: true)
       featuredImage {
         title
         description
         gatsbyImageData(
           layout: CONSTRAINED
-          placeholder: BLURRED
+          placeholder: DOMINANT_COLOR
           formats: [AUTO, WEBP, AVIF]
         )
       }
@@ -85,7 +95,7 @@ export const pageQuery = graphql`
         description
         gatsbyImageData(
           layout: CONSTRAINED
-          placeholder: BLURRED
+          placeholder: DOMINANT_COLOR
           formats: [AUTO, WEBP, AVIF]
         )
       }

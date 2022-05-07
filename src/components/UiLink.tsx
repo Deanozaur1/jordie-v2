@@ -14,6 +14,7 @@ const UiLink: React.FC<UiLinkProps> = ({
   children,
   className,
   disabled,
+  activeClassName,
   ...otherProps
 }) => {
   const defaults = {
@@ -36,7 +37,7 @@ const UiLink: React.FC<UiLinkProps> = ({
 
     case !isUrl(to) && notEmpty(to):
       return (
-        <Link to={to} {...(defaults as any)}>
+        <Link to={to} activeClassName={activeClassName} {...(defaults as any)}>
           {children}
         </Link>
       )

@@ -1,11 +1,10 @@
 import Typography from "typography"
-const DEFAULT_FONTS = ['Arial', 'Helvetica', 'sans-serif']
-
+const DEFAULT_FONTS = ["Arial", "Helvetica", "sans-serif"]
 
 export enum Fonts {
   Kepler = "kepler-std-display",
   KeplerCondensed = "kepler-std-condensed-display",
-  Usual = "usual"
+  Usual = "usual",
 }
 
 const typography = new Typography({
@@ -19,13 +18,13 @@ const typography = new Typography({
     h1: {
       marginBottom: rhythm(10 / 16),
     },
-    'h2, .head-2': {
+    "h2, .head-2": {
       fontWeight: 300,
       marginBottom: rhythm(8 / 16),
       ...adjustFontSizeTo("64px"),
     },
     h3: {
-      fontFamily: [Fonts.Kepler, ...DEFAULT_FONTS].join(', '),
+      fontFamily: [Fonts.Kepler, ...DEFAULT_FONTS].join(", "),
       fontWeight: 500,
       marginBottom: rhythm(8 / 16),
       ...adjustFontSizeTo("48px"),
@@ -57,11 +56,11 @@ const typography = new Typography({
     "blockquote > :last-child": {
       marginBottom: 0,
     },
-    '.font-primary': {
-      fontFamily: [Fonts.KeplerCondensed, ...DEFAULT_FONTS].join(', ')
+    ".font-primary": {
+      fontFamily: [Fonts.KeplerCondensed, ...DEFAULT_FONTS].join(", "),
     },
-    '.font-secondary': {
-      fontFamily: [Fonts.Usual, ...DEFAULT_FONTS].join(', ')
+    ".font-secondary": {
+      fontFamily: [Fonts.Usual, ...DEFAULT_FONTS].join(", "),
     },
   }),
 })
